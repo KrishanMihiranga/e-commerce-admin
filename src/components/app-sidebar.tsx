@@ -34,7 +34,7 @@ const items: ItemsProps[] = [
     { title: "Dashboard", url: "/", icon: Home },
 ];
 const manageItems: ItemsProps[] = [
-    { title: "Manage Items", url: "/manage-items", icon: SendToBack },
+    { title: "Manage Products", url: "/manage-products", icon: SendToBack },
 ]
 
 export function AppSidebar() {

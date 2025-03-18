@@ -5,7 +5,6 @@ import NotFoundPage from "@/pages/NotFoundPage";
 import ManageItemsPage from "@/pages/ManageItemsPage";
 import NavBar from "@/components/Nav/NavBar";
 import Footer from "@/components/Footer/Footer";
-
 const AppRoutes = () => {
     return (
         <Router>
@@ -13,7 +12,7 @@ const AppRoutes = () => {
                 <NavBar />
                 <Routes>
                     <Route path="/" element={<App />} />
-                    <Route path="/manage-items" element={<ManageItemsPage />} />
+                    <Route path="/manage-products" element={<ManageItemsPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
                 <Footer />

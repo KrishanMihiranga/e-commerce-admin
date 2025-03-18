@@ -1,6 +1,6 @@
 import ManageItemsContent from "@/components/ManageItems/ManageItemsContent"
 import { Button } from "@/components/ui/button"
-import { Plus} from "lucide-react"
+import { Plus } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import {
     Dialog,
@@ -22,11 +22,12 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
-import {  useState } from "react"
+import { useState } from "react"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import FileUploader from "@/components/fileUploader/FileUploader"
 import { Label } from "@/components/ui/label"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -66,18 +67,18 @@ const ManageItemsPage = () => {
             const newVariant = {
                 ...newItem,
                 id: crypto.randomUUID(),
-                coverImage: coverImage, 
-                restImages: restImages, 
+                coverImage: coverImage,
+                restImages: restImages,
             };
-            setItems([...items, newVariant]); 
+            setItems([...items, newVariant]);
             setNewItem({
                 id: crypto.randomUUID(),
                 color: "",
                 sizes: [],
                 price: 0,
             });
-            setCoverImage(undefined); 
-            setRestImages([]); 
+            setCoverImage(undefined);
+            setRestImages([]);
         }
     };
 
@@ -217,153 +218,156 @@ const ManageItemsPage = () => {
                                 </DialogFooter>
                             </form>
                         </Form>
-                        <section className="grid grid-cols-2 w-full gap-4">
-                            {items.map((item) => (
-                                <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-950">
-                                    <div className="p-4 md:p-6">
-                                        <div className="flex items-center justify-between gap-4">
-                                            <div className="flex items-center gap-4">
-                                                <div>
-                                                    <h3 className="font-semibold text-lg">{item.color}</h3>
-                                                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                                                        {item.sizes.map((size: any) => `${size.size} (${size.qty})`).join(", ")}
-                                                    </p>
-                                                    <p className="text-sm font-bold">${item.price}</p>
-                                                </div>
-                                            </div>
+                        <ScrollArea className="h-[50vh]">
 
-                                            
-                                            {item.coverImage && (
-                                                <div className="w-20 h-20 bg-gray-100 rounded-md overflow-hidden">
-                                                    <img src={item.coverImage} alt="Cover Image" className="w-full h-full object-cover" />
-                                                </div>
-                                            )}
-                                        </div>
-
-                                       
-                                        {item.restImages.length > 0 && (
-                                            <div className="mt-4 grid grid-cols-4 gap-2">
-                                                {item.restImages.map((image: string, index: number) => (
-                                                    <div key={index} className="relative">
-                                                        <img src={image} alt="Rest Image" className="w-20 h-20 object-cover rounded-md" />
+                            <section className="grid grid-cols-2 w-full gap-4">
+                                {items.map((item) => (
+                                    <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-950">
+                                        <div className="p-4 md:p-6">
+                                            <div className="flex items-center justify-between gap-4">
+                                                <div className="flex items-center gap-4">
+                                                    <div>
+                                                        <h3 className="font-semibold text-lg">{item.color}</h3>
+                                                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                                                            {item.sizes.map((size: any) => `${size.size} (${size.qty})`).join(", ")}
+                                                        </p>
+                                                        <p className="text-sm font-bold">${item.price}</p>
                                                     </div>
-                                                ))}
+                                                </div>
+
+
+                                                {item.coverImage && (
+                                                    <div className="w-20 h-20 bg-gray-100 rounded-md overflow-hidden">
+                                                        <img src={item.coverImage} alt="Cover Image" className="w-full h-full object-cover" />
+                                                    </div>
+                                                )}
                                             </div>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
 
-                            
-                            <div className="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-950">
-                                <div className="p-4 md:p-6">
-                                    <div className="flex flex-col gap-5">
 
-                                       
-                                        <div>
-                                            <Label className="mb-1">Color</Label>
-                                            <Select value={newItem.color} onValueChange={(value) => setNewItem({ ...newItem, color: value })}>
-                                                <SelectTrigger className="w-full">
-                                                    <SelectValue placeholder="Select a color" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectItem value="Black">Black</SelectItem>
-                                                    <SelectItem value="White">White</SelectItem>
-                                                    <SelectItem value="Purple">Purple</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                        </div>
-
-                                        
-                                        <div>
-                                            <Label className="mb-1">Sizes</Label>
-                                            {newItem.sizes.length > 0 && (
-                                                <div className="border p-3 rounded-md mb-3">
-                                                    {newItem.sizes.map((size) => (
-                                                        <div key={size.id} className="flex justify-between text-sm">
-                                                            <span>{size.size}</span>
-                                                            <span>{size.qty}</span>
+                                            {item.restImages.length > 0 && (
+                                                <div className="mt-4 grid grid-cols-4 gap-2">
+                                                    {item.restImages.map((image: string, index: number) => (
+                                                        <div key={index} className="relative">
+                                                            <img src={image} alt="Rest Image" className="w-20 h-20 object-cover rounded-md" />
                                                         </div>
                                                     ))}
                                                 </div>
                                             )}
-                                            <div className="flex gap-3 items-center">
-                                                <Select value={newSize.size} onValueChange={(value) => setNewSize({ ...newSize, size: value })}>
+                                        </div>
+                                    </div>
+                                ))}
+
+
+                                <div className="bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-950">
+                                    <div className="p-4 md:p-6">
+                                        <div className="flex flex-col gap-5">
+
+
+                                            <div>
+                                                <Label className="mb-1">Color</Label>
+                                                <Select value={newItem.color} onValueChange={(value) => setNewItem({ ...newItem, color: value })}>
                                                     <SelectTrigger className="w-full">
-                                                        <SelectValue placeholder="Size" />
+                                                        <SelectValue placeholder="Select a color" />
                                                     </SelectTrigger>
                                                     <SelectContent>
-                                                        <SelectItem value="S">S</SelectItem>
-                                                        <SelectItem value="M">M</SelectItem>
-                                                        <SelectItem value="L">L</SelectItem>
+                                                        <SelectItem value="Black">Black</SelectItem>
+                                                        <SelectItem value="White">White</SelectItem>
+                                                        <SelectItem value="Purple">Purple</SelectItem>
                                                     </SelectContent>
                                                 </Select>
-                                                <Input
-                                                    type="number"
-                                                    value={newSize.qty}
-                                                    onChange={(e) => setNewSize({ ...newSize, qty: Number(e.target.value) })}
-                                                    placeholder="Qty"
-                                                    className="w-24"
-                                                />
-                                                <Button size="sm" onClick={handleAddSize}>
-                                                    + Add
-                                                </Button>
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div>
-                                            <Label className="mb-1">Price</Label>
-                                            <Input
-                                                type="number"
-                                                placeholder="Price"
-                                                value={newItem.price || ""}
-                                                onChange={(e) => setNewItem({ ...newItem, price: Number(e.target.value) })}
-                                            />
-                                        </div>
-
-                                       
-                                        <div className="flex gap-5">
-                                           
-                                            <div>
-                                                <Label className="mb-1">Cover Image</Label>
-                                                {coverImage ? (
-                                                    <div className="flex flex-col gap-2">
-                                                        <img src={coverImage} alt="Cover Image" className="w-20 rounded-md shadow" />
-                                                        <Button size="sm" variant="destructive" onClick={() => setCoverImage(undefined)}>
-                                                            Remove
-                                                        </Button>
-                                                    </div>
-                                                ) : (
-                                                    <FileUploader onUpload={handleUploadComplete} />
-                                                )}
                                             </div>
 
-                                          
+
                                             <div>
-                                                <Label className="mb-1">Other Images</Label>
-                                                {restImages.length > 0 ? (
-                                                    <div className="grid grid-cols-4 gap-2">
-                                                        {restImages.map((image, index) => (
-                                                            <div key={index} className="relative">
-                                                                <img src={image} alt="Image" className="w-20 rounded-md shadow" />
+                                                <Label className="mb-1">Sizes</Label>
+                                                {newItem.sizes.length > 0 && (
+                                                    <div className="border p-3 rounded-md mb-3">
+                                                        {newItem.sizes.map((size) => (
+                                                            <div key={size.id} className="flex justify-between text-sm">
+                                                                <span>{size.size}</span>
+                                                                <span>{size.qty}</span>
                                                             </div>
                                                         ))}
-                                                        <FileUploader onUpload={handleRestImageUploadComplete} type={"small"} />
                                                     </div>
-                                                ) : (
-                                                    <FileUploader onUpload={handleRestImageUploadComplete} />
                                                 )}
+                                                <div className="flex gap-3 items-center">
+                                                    <Select value={newSize.size} onValueChange={(value) => setNewSize({ ...newSize, size: value })}>
+                                                        <SelectTrigger className="w-full">
+                                                            <SelectValue placeholder="Size" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectItem value="S">S</SelectItem>
+                                                            <SelectItem value="M">M</SelectItem>
+                                                            <SelectItem value="L">L</SelectItem>
+                                                        </SelectContent>
+                                                    </Select>
+                                                    <Input
+                                                        type="number"
+                                                        value={newSize.qty}
+                                                        onChange={(e) => setNewSize({ ...newSize, qty: Number(e.target.value) })}
+                                                        placeholder="Qty"
+                                                        className="w-24"
+                                                    />
+                                                    <Button size="sm" onClick={handleAddSize}>
+                                                        + Add
+                                                    </Button>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <Button className="mt-4 w-full" onClick={handleAddItem}>
-                                            Save Variant
-                                        </Button>
+
+                                            <div>
+                                                <Label className="mb-1">Price</Label>
+                                                <Input
+                                                    type="number"
+                                                    placeholder="Price"
+                                                    value={newItem.price || ""}
+                                                    onChange={(e) => setNewItem({ ...newItem, price: Number(e.target.value) })}
+                                                />
+                                            </div>
+
+
+                                            <div className="flex gap-5">
+
+                                                <div>
+                                                    <Label className="mb-1">Cover Image</Label>
+                                                    {coverImage ? (
+                                                        <div className="flex flex-col gap-2">
+                                                            <img src={coverImage} alt="Cover Image" className="w-20 rounded-md shadow" />
+                                                            <Button size="sm" variant="destructive" onClick={() => setCoverImage(undefined)}>
+                                                                Remove
+                                                            </Button>
+                                                        </div>
+                                                    ) : (
+                                                        <FileUploader onUpload={handleUploadComplete} />
+                                                    )}
+                                                </div>
+
+
+                                                <div>
+                                                    <Label className="mb-1">Other Images</Label>
+                                                    {restImages.length > 0 ? (
+                                                        <div className="grid grid-cols-4 gap-2">
+                                                            {restImages.map((image, index) => (
+                                                                <div key={index} className="relative">
+                                                                    <img src={image} alt="Image" className="w-20 rounded-md shadow" />
+                                                                </div>
+                                                            ))}
+                                                            <FileUploader onUpload={handleRestImageUploadComplete} type={"small"} />
+                                                        </div>
+                                                    ) : (
+                                                        <FileUploader onUpload={handleRestImageUploadComplete} />
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            <Button className="mt-4 w-full" onClick={handleAddItem}>
+                                                Save Variant
+                                            </Button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </section>
+                            </section>
+                        </ScrollArea>
                     </DialogHeader>
                 </DialogContent>
 

@@ -29,3 +29,8 @@ interface SizesProps {
     size: string,
     qty: number
 }
+export interface ColorProps {
+    key: string,
+    name: string,
+    hex: string,
+} 

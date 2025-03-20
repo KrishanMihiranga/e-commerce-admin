@@ -33,9 +33,13 @@ export interface ColorProps {
     key: string,
     name: string,
     hex: string,
-} 
+}
 export interface SizeProps {
     size: string,
     length: number,
     chest: number,
+}
+export interface CategoryProps {
+    key: string,
+    name: string,
 } 

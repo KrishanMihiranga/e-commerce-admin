@@ -34,3 +34,8 @@ export interface ColorProps {
     name: string,
     hex: string,
 } 
+export interface SizeProps {
+    size: string,
+    length: number,
+    chest: number,
+} 

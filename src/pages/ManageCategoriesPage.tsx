@@ -22,8 +22,7 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { useEffect, useState } from "react"
-import { CategoryProps, SizeProps } from "@/common/interfaces"
-import { CreateNewSize } from "@/service/SizesService"
+import { CategoryProps } from "@/common/interfaces"
 import { CreateCategory, GetCategoryByType } from "@/service/CategoriesService"
 import ManageCategoriesContent from "@/components/ManageCategories/ManageCategoriesContent"
 import {

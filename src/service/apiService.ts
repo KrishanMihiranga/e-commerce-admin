@@ -1,11 +1,10 @@
 "use server"
 
 import axios from "axios";
-import conf, { apiConfig } from "./apiConfig";
+import { apiConfig } from "./apiConfig";
 import { ApiObject } from "@/lib/utils";
 import * as constants from "@/common/constants"
 import { Cookies } from "typescript-cookie";
-import { json } from "stream/consumers";
 
 
 export const callApi = async (apiObject: ApiObject): Promise<any> => {

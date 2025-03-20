@@ -4,3 +4,16 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export interface ApiObject {
+  method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+  authentication?: boolean;
+  urlencoded?: boolean;
+  arrayBufferType?: boolean;
+  multipart?: boolean;
+  isWithoutPrefix?: boolean;
+  endpoint: string;
+  body?: any;
+  state?: string;
+  isBasicAuth?: boolean;
+}
